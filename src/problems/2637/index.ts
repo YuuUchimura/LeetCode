@@ -1,3 +1,7 @@
+/**
+ * 2637. Promise Time Limit
+ */
+
 type Fn = (...params: any[]) => Promise<any>;
 
 function timeLimit(fn: Fn, t: number): Fn {
