@@ -13,14 +13,18 @@ type JSONValue =
 type SortByFn = (value: JSONValue) => number;
 
 function sortBy(arr: JSONValue[], fn: SortByFn): JSONValue[] {
-  if (typeof arr[0] === "number" || typeof arr[0] === "string") {
-    return arr.slice().sort();
+  if (typeof arr[0] === "string") {
+    return arr
+      .slice()
+      .sort((a, b) => (a as string).length - (b as string).length);
+  }
+
+  if (typeof arr[0] === "number") {
+    return arr.slice().sort((a, b) => (a as number) - (b as number));
   }
 
   if (typeof arr[0] === "object") {
-    return arr.slice().sort((a, b) => {
-      return fn(a) - fn(b);
-    });
+    return arr.slice().sort((a, b) => fn(a) - fn(b));
   }
 
   return [];
